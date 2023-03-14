@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MyPrayer</string>
+    <string name="white_background">White Background</string>
+    <string name="button">Button</string>
+    <string name="home">Home</string>
+    <string name="Qibla">Qibla</string>
+    <string name="PrayerTimes">Prayer Times</string>
+    <string name="Quran">Quran</string>
+</resources>
