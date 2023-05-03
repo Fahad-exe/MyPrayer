@@ -13,10 +13,9 @@
     <color name="bgBlack">#060606</color>
     <color name="Grey">#24272c</color>
     <color name="offwhite">#fefaf1</color>
-    <color name="lightBlue">#4a87f5</color>
-    <color name="skyBlue">#a1e5f5</color>
-    <color name="redish">#fd5c82</color>
-    <color name="white2">#fdfcff</color>
-    <color name="blue">#407cf3</color>
+    <color name="lightBlue">#73b0cd</color>
+    <color name="skyBlue">#A8dff1</color>
+    <color name="white2">#f5f5f5</color>
+    <color name="blue">#3d7c98</color>
 
 </resources>

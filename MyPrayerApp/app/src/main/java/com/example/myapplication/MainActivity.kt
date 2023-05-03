@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         val homeFragment = HomeFragment()
         val prayerTimeFragment = PrayerTimeFragment()
         val qiblaFragment = QiblaFragment()
-        val quranFragment = QuranFragment()
+        val quranActivity =  QuranActivity()
         val settingsFragment = SettingsFragment()
         val bottom_navigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
@@ -26,11 +26,10 @@ class MainActivity : AppCompatActivity() {
 
         bottom_navigation.setOnItemSelectedListener() {
             when(it.itemId){
-                R.id.Home_ic-> makeCurrentFragment(homeFragment)
+                R.id.Home_ic -> makeCurrentFragment(homeFragment)
                 R.id.Time_ic -> makeCurrentFragment(prayerTimeFragment)
                 R.id.Qibla_ic -> makeCurrentFragment(qiblaFragment)
-                R.id.Quran_ic -> makeCurrentFragment(quranFragment)
-                R.id.Settings_ic-> makeCurrentFragment(settingsFragment)
+                R.id.Settings_ic -> makeCurrentFragment(settingsFragment)
             }
             true
         }

@@ -6,7 +6,7 @@
     <string name="Qibla">Qibla</string>
     <string name="PrayerTimes">Prayer Times</string>
     <string name="Quran">Quran</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
@@ -22,4 +22,16 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="playlist_cover">playlist Cover</string>
+    <string name="previous">previous</string>
+    <string name="play">Play</string>
+    <string name="next_surrah">next Surrah</string>
+    <string name="title_activity_quran">QuranActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>
