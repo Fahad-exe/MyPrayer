@@ -1,36 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_gravity="center"
     tools:context=".QuranActivity">
 
+    <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+    >
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Surah Title"
+        android:text="@string/surah_title"
         android:textSize="26sp"
-        android:textColor="@color/white"
+        android:textColor="@color/bgBlack"
         />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/quran_cover"/>
 
-        <SeekBar
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginBottom="40dp"
+        android:src="@drawable/quran_cover"
+        android:contentDescription="@string/album_cover" />
+
+    <SeekBar
             android:id="@+id/seekbar"
             android:layout_width="300dp"
-            android:layout_height="wrap_content"/>
-    <LinearLayout
-        android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/repeat_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/repeat_btn"
+                android:src="@drawable/ic_baseline_repeat"
+                android:clickable="true"
+                android:layout_margin="15dp"
+                 />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/previous_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/previous_btn"
+                android:src="@drawable/ic_baseline_skip_previous"
+                android:clickable="true"
+                android:layout_margin="5dp"
+                 />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/play_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/play_pause_btn"
+                android:src="@drawable/ic_baseline_play"
+                android:clickable="true"
+                android:layout_margin="5dp"
+                />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/next_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/next_btn"
+                android:src="@drawable/ic_baseline_skip_next"
+                android:clickable="true"
+                android:layout_margin="5dp"
+                />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/List_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_reorder"
+                android:contentDescription="@string/list_btn"
+                android:clickable="true"
+                android:layout_margin="15dp"
+                />
+
+        </LinearLayout>
+   </LinearLayout>
+    <include
+        layout="@layout/element_bottom_navigation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
 
-        
-    </LinearLayout>
-
-</LinearLayout>
+        />
+</RelativeLayout>

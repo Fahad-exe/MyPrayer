@@ -34,4 +34,17 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="surah_title">Surah Title</string>
+    <string name="todo">TODO</string>
+    <string name="album_cover">Album Cover</string>
+    <string name="repeat_button">Repeat Button</string>
+    <string name="previous_button">previous Button</string>
+    <string name="play_pause_button">Play/Pause Button</string>
+    <string name="next_button">next button</string>
+    <string name="list_button">List button</string>
+    <string name="list_btn">list_btn</string>
+    <string name="next_btn">next_btn</string>
+    <string name="play_pause_btn">play_pause_btn</string>
+    <string name="previous_btn">previous_btn</string>
+    <string name="repeat_btn">repeat_btn</string>
 </resources>
