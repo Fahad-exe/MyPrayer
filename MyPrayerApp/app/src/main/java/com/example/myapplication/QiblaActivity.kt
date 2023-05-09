@@ -30,9 +30,11 @@ class QiblaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qibla)
-        mImageViewCompass = findViewById(R.id.imgViewCompass)
+
         mSensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        mMagnetometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        mMagnetometer = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        mImageViewCompass = findViewById(R.id.imgViewCompass)
     }
     override fun onResume(){
         super.onResume()
@@ -50,10 +52,29 @@ private val mSensorListener = object : SensorEventListener {
 
 
     override fun onSensorChanged(event: SensorEvent) {
-        calculateCompassDirection(event)
+        //calculateCompassDirection(event)
+        if (event.sensor == null){
+            return
+        }
+        if (event.sensor.type == Sensor.TYPE_ACCELEROMETER){
+            System.arraycopy(event.values,0, mAccelerationValues, 0,event.values.size)
+        }else if (event.sensor.type == Sensor.TYPE_MAGNETIC_FIELD){
+            System.arraycopy(event.values,0, mGravityValues,0, event.values.size)
+        }
+        if (SensorManager.getRotationMatrix(mRotationMatrix,null, mAccelerationValues,mGravityValues)){
+            val orientation = FloatArray(3)
+            SensorManager.getOrientation(mRotationMatrix,orientation)
+            val azimuthInRadians = orientation[0]
+            val azimuthInDegrees = Math.toDegrees(azimuthInRadians.toDouble()).toFloat()
+            val rotateAnimation = RotateAnimation(mLastDirectionInDegrees,-azimuthInDegrees,Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f)
+            rotateAnimation.duration = 200
+            rotateAnimation.fillAfter = true
+            mImageViewCompass.startAnimation(rotateAnimation)
+            mLastDirectionInDegrees = -azimuthInDegrees
+        }
     }
 
-    private fun calculateCompassDirection(event: SensorEvent) {
+    /*private fun calculateCompassDirection(event: SensorEvent) {
 
         when (event.sensor.type){
             Sensor.TYPE_MAGNETIC_FIELD -> mGravityValues = event.values.clone()}
@@ -69,7 +90,7 @@ private val mSensorListener = object : SensorEventListener {
             mLastDirectionInDegrees = azimuth
         }
     }
-
+*/
     override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {
         //Nothing to do
     }
