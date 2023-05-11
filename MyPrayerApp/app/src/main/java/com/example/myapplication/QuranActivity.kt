@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 
+import android.content.Intent
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.util.Log
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_quran.*
 
@@ -28,6 +30,31 @@ class QuranActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quran)
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+
+        bottomNavigationView.setOnItemSelectedListener() { menuItem ->
+            when (menuItem.itemId) {
+                R.id.Qibla_ic -> {
+                    // Handle the home action
+                    startActivity(Intent(this, QiblaActivity::class.java))
+                    true
+                }
+                R.id.home_ic -> {
+                    // Handle the profile action
+                    startActivity(Intent(this, MainActivity::class.java))
+                    true
+                }
+                R.id.Time_ic -> {
+                    // Handle the settings action
+                    startActivity(Intent(this, TimeActivity::class.java))
+                    true
+                }
+                else -> false
+            }
+        }
+
+
         mseekBar = findViewById(R.id.seekbar)
         playPause = findViewById(R.id.play_button)
         controlsound(surahList[currentsurahIndex])
