@@ -88,8 +88,6 @@ class QuranActivity : AppCompatActivity() {
                 mMediaPlayer?.pause()
                 mMediaPlayer?.release()
 
-
-
             }else{
 
                     playNext()

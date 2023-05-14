@@ -90,6 +90,7 @@
                 android:contentDescription="@string/list_btn"
                 android:clickable="true"
                 android:layout_margin="15dp"
+                android:itemBackground="?attr/colorPrimary"
                 />
 
         </LinearLayout>

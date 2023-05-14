@@ -1,6 +1,8 @@
 package com.example.myapplication
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +13,7 @@ import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 import com.example.myapplication.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,22 +26,25 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setOnItemSelectedListener() { menuItem ->
             when (menuItem.itemId) {
                 R.id.Qibla_ic -> {
-                    // Handle the home action
+                    // Handle the Qibla action
                     startActivity(Intent(this, QiblaActivity::class.java))
+
                     true
                 }
                 R.id.Quran_ic -> {
-                    // Handle the profile action
+                    // Handle the Quran action
                     startActivity(Intent(this, QuranActivity::class.java))
                     true
                 }
                 R.id.Time_ic -> {
-                    // Handle the settings action
+                    // Handle the Time action
                     startActivity(Intent(this, TimeActivity::class.java))
                     true
                 }
+
                 else -> false
             }
+
         }
     }
 }

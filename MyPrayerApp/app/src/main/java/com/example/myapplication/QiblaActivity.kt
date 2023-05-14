@@ -3,6 +3,7 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.ColorStateList
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -18,6 +19,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_qibla.*
 import java.security.Permission
 
 
@@ -121,8 +123,6 @@ class QiblaActivity : AppCompatActivity(), SensorEventListener {
             if (mLocation !=null){
                  kabaahLatitude = mLocation.latitude
                  kabaahLongitude = mLocation.longitude
-
-
             }
         }
     }

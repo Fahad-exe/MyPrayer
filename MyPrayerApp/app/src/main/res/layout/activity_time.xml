@@ -6,44 +6,59 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TimeActivity">
+    tools:context=".TimeActivity"
+    android:orientation="vertical">
 
-  <RelativeLayout
-      xmlns:android="http://schemas.android.com/apk/res/android"
+  <androidx.cardview.widget.CardView
       android:id="@+id/SearchcityRl"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_marginStart="10dp"
+      android:layout_marginEnd="10dp"
       android:layout_above="@id/FajrRl"
-      >
+      app:cardBackgroundColor="@color/white"
+      app:cardCornerRadius="20dp"
+      app:cardElevation="10dp"
+      app:cardMaxElevation="12dp"
+      app:cardPreventCornerOverlap="true"
+      app:cardUseCompatPadding="true">
 
     <EditText
         android:id="@+id/Searchcity"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
+        android:layout_height="48dp"
         android:background="@android:color/transparent"
-        android:hint="Enter City to Search"
         android:gravity="center"
-        android:textSize="20sp"
-        />
+        android:hint="Enter City to Search"
+        android:textColorHint="@color/bgBlack"
+        android:inputType="text"
+        android:textSize="20sp" />
+
     <ImageView
 
         android:id="@+id/search_btn"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="70dp"
-        android:layout_centerInParent="true"
-        android:src="@drawable/ic_search"
-        />
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_margin="10dp"
+        android:layout_alignEnd="@id/SearchcityRl"
+        android:contentDescription="Search"
+        android:layout_gravity="right"
+        android:src="@drawable/ic_search" />
 
-  </RelativeLayout>
-  <RelativeLayout
+  </androidx.cardview.widget.CardView>
+
+  <androidx.cardview.widget.CardView
       android:id="@+id/FajrRl"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_centerInParent="true"
+      android:layout_margin="5dp"
+      android:layout_above="@id/DhurRl"
+      app:cardElevation="10dp"
+      app:cardCornerRadius="10dp"
+      app:cardBackgroundColor="@color/white"
+      app:cardMaxElevation="12dp"
+      app:cardPreventCornerOverlap="true"
+      app:cardUseCompatPadding="true"
       >
     <TextView
         android:id="@+id/titlefajr"
@@ -55,48 +70,67 @@
         />
     <TextView
         android:layout_below="@id/titlefajr"
-        android:id="@+id/fajr"
+        android:id="@+id/Fajr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:text="0:00"
         android:gravity="center"
         android:textSize="20sp"
         />
 
-  </RelativeLayout>
-  <RelativeLayout
+  </androidx.cardview.widget.CardView>
+
+  <androidx.cardview.widget.CardView
       android:id="@+id/DhurRl"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_below="@id/FajrRl"
-      android:layout_marginTop="5dp"
+      android:layout_above="@id/AsrRl"
+      android:layout_margin="5dp"
+      app:cardElevation="10dp"
+      app:cardCornerRadius="10dp"
+      app:cardBackgroundColor="@color/white"
+      app:cardMaxElevation="12dp"
+      app:cardPreventCornerOverlap="true"
+      app:cardUseCompatPadding="true"
       >
     <TextView
         android:id="@+id/titleDhur"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="DHUR"
+        android:text="Dhuhr"
         android:gravity="center"
         android:textSize="20sp"
         />
     <TextView
         android:layout_below="@id/titleDhur"
-        android:id="@+id/Dhur"
+        android:id="@+id/Dhuhr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:text="0:00"
         android:gravity="center"
         android:textSize="20sp"
         />
 
-  </RelativeLayout>
-  <RelativeLayout
-      xmlns:android="http://schemas.android.com/apk/res/android"
+  </androidx.cardview.widget.CardView>
+
+  <androidx.cardview.widget.CardView
       android:id="@+id/AsrRl"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_below="@id/DhurRl"
-      android:layout_marginTop="5dp"
+      android:layout_above="@id/MaghribRl"
+      android:layout_margin="5dp"
+      app:cardElevation="10dp"
+      app:cardCornerRadius="10dp"
+      app:cardBackgroundColor="@color/white"
+      app:cardMaxElevation="12dp"
+      app:cardPreventCornerOverlap="true"
+      app:cardUseCompatPadding="true"
       >
     <TextView
         android:id="@+id/titleAsr"
@@ -111,20 +145,29 @@
         android:id="@+id/Asr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:text="0:00"
         android:gravity="center"
         android:textSize="20sp"
         />
 
-  </RelativeLayout>
-  <RelativeLayout
-      xmlns:android="http://schemas.android.com/apk/res/android"
+  </androidx.cardview.widget.CardView>
+
+  <androidx.cardview.widget.CardView
+
       android:id="@+id/MaghribRl"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_centerInParent="true"
-      android:layout_below="@id/AsrRl"
-      android:layout_marginTop="5dp"
+      android:layout_above="@id/IshaRl"
+      android:layout_margin="5dp"
+      app:cardElevation="10dp"
+      app:cardCornerRadius="10dp"
+      app:cardBackgroundColor="@color/white"
+      app:cardMaxElevation="12dp"
+      app:cardPreventCornerOverlap="true"
+      app:cardUseCompatPadding="true"
       >
     <TextView
         android:id="@+id/titleMaghrib"
@@ -142,42 +185,55 @@
         android:text="0:00"
         android:gravity="center"
         android:textSize="20sp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         />
 
-  </RelativeLayout>
-  <RelativeLayout
-      xmlns:android="http://schemas.android.com/apk/res/android"
+  </androidx.cardview.widget.CardView>
+
+  <androidx.cardview.widget.CardView
+
       android:id="@+id/IshaRl"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_below="@id/MaghribRl"
-      android:layout_marginTop="5dp"
-      >
+      android:layout_above="@id/bottom_nav"
+      android:layout_margin="5dp"
+      app:cardBackgroundColor="@color/white"
+      app:cardCornerRadius="10dp"
+      app:cardElevation="10dp"
+      app:cardMaxElevation="12dp"
+      app:cardPreventCornerOverlap="true"
+      app:cardUseCompatPadding="true">
+
     <TextView
         android:id="@+id/titleIsha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Isha"
         android:gravity="center"
-        android:textSize="20sp"
-        />
+        android:text="Isha"
+        android:textSize="20sp" />
+
     <TextView
-        android:layout_below="@id/titleIsha"
         android:id="@+id/Isha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="0:00"
+        android:layout_below="@id/titleIsha"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:textSize="20sp"
-        />
+        android:text="0:00"
+        android:textSize="20sp" />
+  </androidx.cardview.widget.CardView>
 
-  </RelativeLayout>
   <include
+      android:id="@+id/bottom_nav"
       layout="@layout/element_bottom_navigation"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_gravity="bottom"
       android:layout_alignParentBottom="true"
+      android:layout_gravity="bottom"
 
       />
-  </RelativeLayout>
+</RelativeLayout>
