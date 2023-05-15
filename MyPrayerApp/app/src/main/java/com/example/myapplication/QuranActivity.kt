@@ -27,6 +27,7 @@ class QuranActivity : AppCompatActivity() {
     var currentsurahIndex: Int = 0
     var surahName: TextView? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quran)
@@ -67,6 +68,7 @@ class QuranActivity : AppCompatActivity() {
 
     private fun controlsound(id: Int) {
 
+
         playPause?.setOnClickListener {
 
             if (isPlaying) {
@@ -101,6 +103,16 @@ class QuranActivity : AppCompatActivity() {
                 playPrev()
             }
             playPrev()
+        }
+        repeat_button.setOnClickListener{
+            if (isPlaying){
+                mMediaPlayer?.start()
+                mMediaPlayer?.setLooping(true)
+                repeat_button.setImageResource(R.drawable.ic_baseline_repeat_one)
+            }else{
+                mMediaPlayer?.pause()
+                repeat_button.setImageResource(R.drawable.ic_baseline_repeat)
+            }
         }
         mseekBar?.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(mseekBar: SeekBar?, progress: Int, fromUser: Boolean) {

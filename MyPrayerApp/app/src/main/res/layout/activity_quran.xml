@@ -50,6 +50,7 @@
                 android:src="@drawable/ic_baseline_repeat"
                 android:clickable="true"
                 android:layout_margin="15dp"
+                app:backgroundTint="?attr/colorPrimary"
                  />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -60,6 +61,7 @@
                 android:src="@drawable/ic_baseline_skip_previous"
                 android:clickable="true"
                 android:layout_margin="5dp"
+                app:backgroundTint="?attr/colorPrimary"
                  />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -70,6 +72,7 @@
                 android:src="@drawable/ic_baseline_play"
                 android:clickable="true"
                 android:layout_margin="5dp"
+                app:backgroundTint="?attr/colorPrimary"
                 />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -80,6 +83,7 @@
                 android:src="@drawable/ic_baseline_skip_next"
                 android:clickable="true"
                 android:layout_margin="5dp"
+                app:backgroundTint="?attr/colorPrimary"
                 />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -90,7 +94,7 @@
                 android:contentDescription="@string/list_btn"
                 android:clickable="true"
                 android:layout_margin="15dp"
-                android:itemBackground="?attr/colorPrimary"
+                app:backgroundTint="?attr/colorPrimary"
                 />
 
         </LinearLayout>
