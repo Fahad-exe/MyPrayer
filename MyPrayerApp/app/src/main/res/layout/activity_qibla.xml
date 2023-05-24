@@ -6,23 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".QiblaActivity">
 
-
-
-  <ImageView
-      android:id="@+id/imgViewCompass"
+  <TextView
+      android:id="@+id/tvDirection"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:src="@drawable/qibla_compass"
-      android:layout_margin="50dp"
-      app:tint="@color/bgBlack"
-      android:contentDescription="QiblaFinder" />
+      android:layout_marginTop="16dp"
+      android:textAppearance="@style/TextAppearance.AppCompat.Title"
+      android:text="0°"
+     android:layout_centerHorizontal="true" />
+
+  <ImageView
+      android:id="@+id/ivCompass"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      android:visibility="gone"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/ic_compass_direction" />
+
+  <ImageView
+      android:id="@+id/ivNeedle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/tvDirection"
+      app:srcCompat="@drawable/qibla_compass" />
+
+  <TextView
+      android:id="@+id/tvLocation"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Location"
+      android:layout_below="@id/ivNeedle"
+      android:layout_centerHorizontal="true"
+       />
 
   <include
-    layout="@layout/element_bottom_navigation"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom"
-    android:layout_alignParentBottom="true"
-    />
+      layout="@layout/element_bottom_navigation"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:layout_gravity="bottom"
+      app:layout_constraintBottom_toBottomOf="parent" />
 
 </RelativeLayout>

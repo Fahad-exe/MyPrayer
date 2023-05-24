@@ -5,12 +5,12 @@ import android.content.Intent
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.SeekBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -18,15 +18,17 @@ import kotlinx.android.synthetic.main.activity_quran.*
 
 class QuranActivity : AppCompatActivity() {
 
+    private var isPlaying: Boolean = false
+    private var playPause: FloatingActionButton? = null
+    private var mediaPlayer: MediaPlayer? = null
+    private var seekBar: SeekBar? = null
+    private var surahList =
+        mutableListOf(R.raw.salah_bukhatir_al_fatihah, R.raw.salah_bukhatir_al_kawthar)
+    private var surahNameList =
+        mutableListOf("Surah al fatiha","Surah al kawthar")
 
-    var isPlaying: Boolean = false
-    var playPause: FloatingActionButton? = null
-    var mMediaPlayer: MediaPlayer? = null
-    var mseekBar: SeekBar? = null
-    var surahList = mutableListOf(R.raw.salah_bukhatir_al_fatihah, R.raw.salah_bukhatir_al_kawthar)
-    var currentsurahIndex: Int = 0
-    var surahName: TextView? = null
-
+    private var currentSurahIndex: Int = 0
+    private var surahName: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,161 +36,169 @@ class QuranActivity : AppCompatActivity() {
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
-        bottomNavigationView.setOnItemSelectedListener() { menuItem ->
+        bottomNavigationView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.Qibla_ic -> {
-                    // Handle the home action
+                    clearMediaPlayer()
                     startActivity(Intent(this, QiblaActivity::class.java))
                     true
                 }
+
                 R.id.home_ic -> {
-                    // Handle the profile action
+                    clearMediaPlayer()
+
                     startActivity(Intent(this, MainActivity::class.java))
                     true
                 }
+
                 R.id.Time_ic -> {
-                    // Handle the settings action
+                    clearMediaPlayer()
                     startActivity(Intent(this, TimeActivity::class.java))
                     true
                 }
+
                 else -> false
             }
         }
 
-
-        mseekBar = findViewById(R.id.seekbar)
+        seekBar = findViewById(R.id.seekbar)
         playPause = findViewById(R.id.play_button)
-        controlsound(surahList[currentsurahIndex])
         surahName = findViewById(R.id.SurahTitle)
-        mMediaPlayer = MediaPlayer.create(this, surahList[currentsurahIndex])
-
-
-    }
-
-
-    private fun controlsound(id: Int) {
-
+        mediaPlayer = MediaPlayer.create(this, surahList[currentSurahIndex])
+        surahName?.text = surahNameList[currentSurahIndex].toString()
+        controlsound()
 
         playPause?.setOnClickListener {
-
+            // When the play/pause button is clicked
             if (isPlaying) {
+                // If currently playing, pause the audio
                 pause()
-
             } else {
-                MediaPlayer.create(this, surahList[currentsurahIndex])
-                MediaPlayer.MEDIA_INFO_METADATA_UPDATE
-                Log.d("QuranActivity", "ID: ${mMediaPlayer!!.audioSessionId}")
+                // If currently paused, play the audio
                 play()
-
-
             }
             isPlaying = !isPlaying
         }
+
         next_button.setOnClickListener {
-            if (!isPlaying) {
-
-                mMediaPlayer?.pause()
-                mMediaPlayer?.release()
-
-            }else{
-
-                    playNext()
-
-            }
-
+            // When the next button is clicked, play the next surah
+            playNext()
         }
+
         previous_button.setOnClickListener {
-            if (isPlaying) {
-                mMediaPlayer?.release()
-                playPrev()
-            }
+            // When the previous button is clicked, play the previous surah
             playPrev()
         }
-        repeat_button.setOnClickListener{
-            if (isPlaying){
-                mMediaPlayer?.start()
-                mMediaPlayer?.setLooping(true)
+
+        repeat_button.setOnClickListener {
+            // When the repeat button is clicked
+            if (isPlaying) {
+                // If currently playing, enable looping and change the repeat button icon
+                mediaPlayer?.start()
+                mediaPlayer?.isLooping = true
                 repeat_button.setImageResource(R.drawable.ic_baseline_repeat_one)
-            }else{
-                mMediaPlayer?.pause()
+            } else {
+                // If currently paused, disable looping and change the repeat button icon
+                mediaPlayer?.pause()
                 repeat_button.setImageResource(R.drawable.ic_baseline_repeat)
             }
         }
-        mseekBar?.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(mseekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+
+        seekBar?.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
-                    mMediaPlayer?.seekTo(progress)
+                    // When the seek bar progress is changed by the user, seek to the corresponding position in the audio
+                    mediaPlayer?.seekTo(progress)
                 }
             }
 
-            override fun onStartTrackingTouch(mseekBar: SeekBar?) {
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                // Called when the user starts interacting with the seek bar (not implemented in this code)
             }
 
-            override fun onStopTrackingTouch(mseekBar: SeekBar?) {
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                // Called when the user stops interacting with the seek bar (not implemented in this code)
             }
         })
+    }
 
+    private fun controlsound() {
+        // Set the maximum value of the seek bar to the duration of the audio
+        mediaPlayer?.setOnPreparedListener {
+            seekBar?.max = mediaPlayer!!.duration
+            initialiseSeekBar()
+        }
     }
 
     private fun initialiseSeekBar() {
-        mseekBar?.max = mMediaPlayer!!.duration
-
+        // Update the seek bar progress based on the current position of the audio
         val handler = Handler(Looper.getMainLooper())
         handler.postDelayed(object : Runnable {
             override fun run() {
                 try {
-                    mseekBar?.progress = mMediaPlayer!!.currentPosition
+                    seekBar?.progress = mediaPlayer!!.currentPosition
                     handler.postDelayed(this, 1000)
                 } catch (e: Exception) {
-                    mseekBar?.progress = 0
+                    seekBar?.progress = 0
                 }
             }
         }, 0)
     }
 
-    fun play() {
-        mMediaPlayer?.start()
+    private fun play() {
+        // Start playing the audio
+        mediaPlayer?.start()
         initialiseSeekBar()
-        Log.d("QuranActivity", "Duration: ${mMediaPlayer!!.duration / 1000} seconds")
+        Log.d("QuranActivity", "Duration: ${mediaPlayer!!.duration / 1000} seconds")
 
         val pauseImage = ContextCompat.getDrawable(this, android.R.drawable.ic_media_pause)
         playPause?.setImageDrawable(pauseImage)
-
-
     }
 
-    fun pause() {
-
-        mMediaPlayer?.pause()
-        Log.d("QuranActivity", "Paused at: ${mMediaPlayer!!.currentPosition / 1000} seconds")
+    private fun pause() {
+        // Pause the audio
+        mediaPlayer?.pause()
+        Log.d("QuranActivity", "Paused at: ${mediaPlayer!!.currentPosition / 1000} seconds")
 
         val startImage = ContextCompat.getDrawable(this, android.R.drawable.ic_media_play)
         playPause?.setImageDrawable(startImage)
     }
 
-    fun playNext() {
-
-        if (currentsurahIndex < (surahList.size - 1)) {
-            currentsurahIndex += 1
-            mMediaPlayer
-            MediaPlayer.create(this, surahList[currentsurahIndex])
-            mMediaPlayer?.start()
+    private fun playNext() {
+        // Play the next surah
+        if (currentSurahIndex < surahList.size - 1) {
+            currentSurahIndex++
+            mediaPlayer?.reset()
+            mediaPlayer = MediaPlayer.create(this, surahList[currentSurahIndex])
+            mediaPlayer?.start()
+            initialiseSeekBar()
+            val pauseImage = ContextCompat.getDrawable(this, android.R.drawable.ic_media_pause)
+            playPause?.setImageDrawable(pauseImage)
+            surahName?.text = surahNameList[currentSurahIndex].toString()
 
         } else {
-            currentsurahIndex = 0
+            currentSurahIndex = 0
         }
     }
 
-    fun playPrev() {
-
-        if (currentsurahIndex < (surahList.size + 1)) {
-            controlsound(currentsurahIndex - 1)
-            currentsurahIndex -= 1
-            MediaPlayer.create(this, surahList[currentsurahIndex])
-            mMediaPlayer?.start()
-
+    private fun playPrev() {
+        // Play the previous surah
+        if (currentSurahIndex > 0) {
+            currentSurahIndex--
+            mediaPlayer?.reset()
+            mediaPlayer = MediaPlayer.create(this, surahList[currentSurahIndex])
+            mediaPlayer?.start()
+            initialiseSeekBar()
+            val pauseImage = ContextCompat.getDrawable(this, android.R.drawable.ic_media_pause)
+            playPause?.setImageDrawable(pauseImage)
+            surahName?.text = surahNameList[currentSurahIndex].toString()
         } else {
-            currentsurahIndex = 0
+            currentSurahIndex = surahList.size - 1
+            mediaPlayer?.reset()
+            mediaPlayer = MediaPlayer.create(this, surahList[currentSurahIndex])
+            mediaPlayer?.start()
+            surahName?.text = surahNameList[currentSurahIndex].toString()
+            initialiseSeekBar()
         }
     }
 
@@ -198,8 +208,10 @@ class QuranActivity : AppCompatActivity() {
     }
 
     private fun clearMediaPlayer() {
-        mMediaPlayer!!.stop()
-        mMediaPlayer!!.release()
+        // Stop and release the MediaPlayer
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
     }
 
 

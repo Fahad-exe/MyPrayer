@@ -31,7 +31,10 @@
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
-
+    <string name="ok">ok</string>
+    <string name="cancel">cancel</string>
+    <string name="gps_settings_title">GPS settings</string>
+    <string name="gps_settings_text">GPS is not enabled, you must activate it first from the settings to get the Qibla direction.</string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="surah_title">Surah Title</string>
@@ -47,4 +50,13 @@
     <string name="play_pause_btn">play_pause_btn</string>
     <string name="previous_btn">previous_btn</string>
     <string name="repeat_btn">repeat_btn</string>
+    <string name="locationunready">Please check the GPS settings and try again</string>
+    <string name="coord">Coordinates:</string>
+    <string name="qibladirection">Qiblah:</string>
+    <string name="longitude">Longitude</string>
+    <string name="latitude">Latitude</string>
+    <string name="fromnorth">Degrees from the north</string>
+    <string name="gpsplz">Check the GPS settings to be able to determine the direction of the Qiblah</string>
+    <string name="consignes">Instructions</string>
+    <string name="qiblatips">To get accurate orientation, please place the phone on a flat surface, check the GPS settings, then re-enter this menu.</string>
 </resources>
